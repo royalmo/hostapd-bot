@@ -9,7 +9,8 @@ any type of application.
 All mac addresses will be given and provided in **lowercase**:
 `'aa:bb:cc:dd:ee:ff'`.
 
-Hour ranges will be provided with format `['20:00', '21:00']`.
+Hour ranges will be represented with integers. The integer `2` represents the
+hour range from `02:00` to `03:00`.
 
 ## Method definitions
 
@@ -51,7 +52,7 @@ ranges_for_mac(mac_address : str) -> list
 ```
 
 Returns the list of hour ranges that this MAC address can connect. An example
-output could be: `[['20:00', '21:00'], ['21:00', '22:00'], ['22:00', '23:00']]`.
+output could be: `[20, 21, 22]`.
 
 ```py
 update_mac(mac_address : str, hour_ranges : list) -> None
