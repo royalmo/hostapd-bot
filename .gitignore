@@ -1,0 +1,8 @@
+# Files to ignore in this project
+
+# Ignore all Python3 generated stuff
+**/__pycache__
+# We may accidentally run the program in python2 and generate .pyc files.
+**/*.pyc
+# Ignore the JSON database
+data.json

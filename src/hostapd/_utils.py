@@ -1,6 +1,6 @@
 from datetime import datetime
 
-ACT_AS_DUMMY = True
+ACT_AS_DUMMY = False
 
 def current_hour():
     return datetime.now().hour

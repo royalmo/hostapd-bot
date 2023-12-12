@@ -6,7 +6,7 @@ DEFAULT_DATA = {
     "admins" : [],
     "subscribed" : [],
     "pending-notifications" : [],
-    "hour-ranges" : [ ([]*24) ] # 24 empty lists for each range (hour of day)
+    "hour-ranges" : [[] for _ in range(24)] # 24 empty lists for each range (hour of day)
 }
 
 def get_json_path():
@@ -19,7 +19,7 @@ def set_json_path(json_path):
 def get_json_data():
     try:
         with open(JSON_PATH, 'r') as f:
-            return json.read(f)
+            return json.load(f)
     except FileNotFoundError:
         print(f"[HostAPd Module] Generating data file at {JSON_PATH}")
         write_json_data(DEFAULT_DATA)

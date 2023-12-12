@@ -29,7 +29,7 @@ def ranges_for_mac(mac_address):
         macs_for_hour = data['hour-ranges'][hour_start]
         if mac_address in macs_for_hour:
             result.append(hour_start)
-    return []
+    return result
 
 def update_mac(mac_address, hour_ranges):
     previous_enabled_macs = list_enabled()
@@ -39,6 +39,8 @@ def update_mac(mac_address, hour_ranges):
             data['hour-ranges'][hour].append(mac_address)
         if hour not in hour_ranges and mac_address in data['hour-ranges'][hour]:
             data['hour-ranges'][hour].remove(mac_address)
+
+    _file_manager.write_json_data(data)
     current_enabled_macs = list_enabled()
 
     if ACT_AS_DUMMY or previous_enabled_macs == current_enabled_macs: return
