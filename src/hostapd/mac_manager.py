@@ -1,7 +1,7 @@
 from ._utils import ACT_AS_DUMMY, current_hour
-from . import _file_manager
+from . import _file_manager, whitelist_updater
 
-if ACT_AS_DUMMY: import random
+import random, subprocess
 
 def list_connected():
     if ACT_AS_DUMMY:
@@ -10,7 +10,8 @@ def list_connected():
         sample_size = random.randint(0, len(enabled))
         return random.sample(enabled, sample_size)
 
-    return [] # TODO integrate command
+    temp = subprocess.Popen(['bash', "-c \"iw dev wlan0 station dump | grep Station | cut -f 2 -s -d' '\""], stdout = subprocess.PIPE) 
+    return str(temp.communicate()).split('\n')
 
 def list_enabled():
     data = _file_manager.get_json_data()
@@ -46,8 +47,7 @@ def update_mac(mac_address, hour_ranges):
     if ACT_AS_DUMMY or previous_enabled_macs == current_enabled_macs: return
 
     # If we get here we need to reload hostAPd whitelist.
-    # TODO
-    
+    whitelist_updater.update_whitelist()
 
 def delete_mac(mac_address):
     # This specific implementation makes removing the same as

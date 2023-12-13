@@ -1,0 +1,49 @@
+Below is the hostapd log fie obtained from the Raspberry Pi. It is added to
+this repository for documentation purposes. There are 3 messages that are
+relevant to us:
+
+- STA <mac_address> not allowed to connect
+- AP-STA-CONNECTED
+- AP-STA-DISCONENCTED
+
+The other messages should be ignored.
+
+Notice the timestamp before each log message.
+
+================================================================================
+1702465717.896175: Configuration file: /etc/hostapd/hostapd.conf
+1702465717.905946: wlan0: Could not connect to kernel driver
+1702465717.906923: Using interface wlan0 with hwaddr dc:a6:32:74:08:c7 and ssid "TestSysComm"
+1702465718.002248: wlan0: interface state UNINITIALIZED->ENABLED
+1702465718.002286: wlan0: AP-ENABLED
+1702465738.307460: 1702465738.307467: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: associated
+1702465738.308627: STA 20:34:fb:b9:6e:37 not allowed to connect
+1702465738.310063: 1702465738.310067: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: disassociated
+1702465738.312771: 1702465738.312775: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: disassociated
+1702465743.497519: 1702465743.497522: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: associated
+1702465743.497799: STA 20:34:fb:b9:6e:37 not allowed to connect
+1702465743.500051: 1702465743.500053: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: disassociated
+1702465743.501003: 1702465743.501005: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: disassociated
+1702465748.323419: 1702465748.323422: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: associated
+1702465748.323728: STA 20:34:fb:b9:6e:37 not allowed to connect
+1702465748.325234: 1702465748.325237: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: disassociated
+1702465756.367715: 1702465756.367721: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: associated
+1702465756.368232: STA 20:34:fb:b9:6e:37 not allowed to connect
+1702465756.371154: 1702465756.371158: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: disassociated
+1702465756.372464: 1702465756.372469: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: disassociated
+1702465771.748113: 1702465771.748118: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: associated
+1702465771.784862: wlan0: AP-STA-CONNECTED 20:34:fb:b9:6e:37
+1702465771.785359: 1702465771.785363: wlan0: STA 20:34:fb:b9:6e:37 RADIUS: starting accounting session 4A05C2244E8B5588
+1702465771.785481: 1702465771.785484: wlan0: STA 20:34:fb:b9:6e:37 WPA: pairwise key handshake completed (RSN)
+1702465795.779956: 1702465795.779961: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: disassociated
+1702465795.780074: wlan0: AP-STA-DISCONNECTED 20:34:fb:b9:6e:37
+1702465795.782618: 1702465795.782622: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: disassociated
+1702465795.782734: 1702465795.782737: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: disassociated
+1702465815.184786: 1702465815.184792: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: associated
+1702465815.207296: wlan0: AP-STA-CONNECTED 20:34:fb:b9:6e:37
+1702465815.207743: 1702465815.207747: wlan0: STA 20:34:fb:b9:6e:37 RADIUS: starting accounting session 86867040ACC03DEA
+1702465815.207846: 1702465815.207850: wlan0: STA 20:34:fb:b9:6e:37 WPA: pairwise key handshake completed (RSN)
+1702465843.591577: wlan0: AP-STA-DISCONNECTED 20:34:fb:b9:6e:37
+1702465843.622904: 1702465843.622911: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: disassociated
+1702465843.624848: 1702465843.624852: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: disassociated
+1702465843.634703: 1702465843.634711: wlan0: STA 20:34:fb:b9:6e:37 IEEE 802.11: disassociated

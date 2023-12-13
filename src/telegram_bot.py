@@ -1,6 +1,8 @@
-import hostapd
+import hostapd, sys
 
 hostapd.set_dummy_mode(True)
+if not hostapd.can_run():
+    sys.exit("\nOnly root can run this script when Dummy mode if Off\n")
 
 print("Hostapd library basic testing")
 print(f"Current MACs in the database: {hostapd.mac_manager.list_all()}")

@@ -127,7 +127,7 @@ Returns the list of subscribed user Telegram IDs.
 
 ### notifier.py
 
-This file contains only one function that should be called regularly:
+This file contains two functions that should be called regularly:
 
 ```py
 get_new_notifications() -> list(str)
@@ -148,6 +148,39 @@ An example output is:
     'The device with MAC ff:ee:dd:cc:bb:aa just disconnected to the AP'
 ]
 ```
+
+```py
+check_new_notifications() -> None
+```
+
+This function will check `hostapd` system logs to check if a device has
+connected or disconnected from the AP. It will load the results in the
+JSON file, and a subsequential call to `get_new_notifications()` will
+retrieve the results.
+
+When the library runs in dummy mode this function will not do anything.
+
+### whitelist_updater.py
+
+This file in responsible of talking directly to `hostapd_cli`. So, when
+run in dummy mode it will not be useful.
+
+```py
+get_enabled_macs_hard() -> list(str)
+```
+
+This function should return the same result than `mac_manager.list_enabled()`,
+however, the one from this module checks the `hostapd_cli` instead of
+the "cached" JSON data.
+
+```py
+update_whitelist() -> None
+```
+
+This function will update `hostapd_cli` whitelist according to the results
+obtained in `mac_manager.list_enabled()`. This function needs to be executed
+every hour so both lists are updated. It is recommended to do this with a
+linux crontab.
 
 ## Example usage
 
