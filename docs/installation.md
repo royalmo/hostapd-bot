@@ -132,6 +132,30 @@ Then, at the end of the file, write:
 0 * * * * /usr/bin/python3 /home/pi/path/to/repository/src/update_whitelist.py
 ```
 
+## Telegram Bot setup
+
+You will need to create a Telegram Bot. Talk to `@botfather` and follow its
+steps. You will end with a **Telegram Token**. Store it in a file in the
+`/src` directory called `hostapd_token.txt`
+
+```
+echo "123456789:aabbcccddeeffgghhiijjkkmmnnooppqq" > hostapd_token.txt
+sudo python3 telegram_bot.py
+```
+
+You will then be able to run the main program.
+
+## Add an admin manually
+
+You can send `/start` to the Telegram bot `@userinfobot` to know your user ID.
+Once you got it, you can execute this command to add yourself as an admin.
+
+```
+sudo python3 add_admin.py 123456789
+```
+
+Replace 123456789 in the command above for your userID.
+
 ## Start the project automatically after a reboot
 
 Finally, we will want our project to restart after a system reboot.
