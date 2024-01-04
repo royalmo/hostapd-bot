@@ -4,7 +4,7 @@ from . import _file_manager, whitelist_updater
 import random, subprocess
 
 def list_connected():
-    if ACT_AS_DUMMY:
+    if ACT_AS_DUMMY: 
         # Choose random devices
         enabled = list_enabled()
         sample_size = random.randint(0, len(enabled))
@@ -23,7 +23,7 @@ def list_all():
     # Remove duplicates and return
     return list(set(flattened_data))
 
-def ranges_for_mac(mac_address):
+def ranges_for_mac(mac_address): #TODO
     result = []
     data = _file_manager.get_json_data()
     for hour_start in range(24):
