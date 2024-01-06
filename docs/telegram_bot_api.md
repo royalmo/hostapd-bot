@@ -63,7 +63,7 @@ Lists all the MAC's that are available to connect right now.
 /active
 ```
 
-### /enabled
+### /all
 
 Lists all the MAC's that are available to connect among all the intervals.
 
