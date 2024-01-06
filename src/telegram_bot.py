@@ -48,7 +48,7 @@ def print_help(message, chat_id):
 def create_new_user(message, chat_id):
     if check_MAC_Interval(message):
         bot.sendMessage(chat_id, "Updating MAC")
-        hostapd.mac_manager.update_mac(str(message.split()[1]), message.split()[2].split(','))
+        hostapd.mac_manager.update_mac(str(message.split()[1]), [int(x) for x in message.split()[2].split(',')])
     else:
         bot.sendMessage(chat_id, "Wrong MAC format or interval out of range, please try again!")
     
@@ -82,10 +82,10 @@ def list_enabled(message, chat_id):
     
 
 def list_everything(message, chat_id):
-    print(hostapd.mac_manager.list_all())
-    try:
-        bot.sendMessage(chat_id,hostapd.mac_manager.list_all())
-    except:
+    macs = hostapd.mac_manager.list_all()
+    if len(macs) > 0:
+        bot.sendMessage(chat_id, 'All MACs:\n- ' + ('\n- '.join(macs)))
+    else:
         bot.sendMessage(chat_id, "There are no MAC's available to connect, try to add one!")
 
 def add_new_admin(message, chat_id):
