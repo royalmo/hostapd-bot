@@ -7,7 +7,7 @@ import hostapd
 import telepot
 from telepot.loop import MessageLoop
 
-hostapd.set_dummy_mode(True)
+hostapd.set_dummy_mode(False)
 if not hostapd.can_run():
     sys.exit("\nOnly root can run this script when Dummy mode if Off\n")
 
@@ -24,9 +24,7 @@ def check_MAC(MAC):
     mac = ''.join(c.lower() for c in MAC if not c.isspace())
     return re.match(regex_mac, mac) 
 
-
 def check_MAC_Interval(args):
-    
     result = args.split()
     try:
         if check_MAC(result[1]):
@@ -38,11 +36,10 @@ def check_MAC_Interval(args):
             return False   
     except:
         return False
-    
 
 def print_help(message, chat_id):
     bot.sendMessage(chat_id, "Here are a list of the commands and it's function:")
-    bot.sendMessage(chat_id, "- /start: Welcome message.\n- /help: Display the list of commands.\n- /create: Give acces to a new MAC into an interval; you need to provide a MAC and select an interval between 1-12 (/create XX:XX:XX:XX:XX:XX MM).\n- /update: Update the intervals of an existing MAC; you need to provide a MAC and select an interval between 1-12 (/update XX:XX:XX:XX:XX:XX MM).\n- /revoke: Revoke permissions to an existing MAC acces to the selected interval; you need to provide a MAC and select an interval between 1-12 (/revoke XX:XX:XX:XX:XX:XX MM).\n- /active: List active MAC's.\n- /enabled: List MAC's enable to connect now.\n- /all: List all the MAC's that are able to connect among the day.\n- /newadmin: Creates a new admin, you need to provide an user id.\n- /deladmin: Deletes an existing admin, you need to provide an user id.\n- /listadmins: List all admins.\n- /sub: Activates notifications for an specific admin when a MAC connects.\n- /unsub: Desactivate notifications for an specific admin when a MAC connects.\n- /listsubs: List admins who are subscribed to notifications.")
+    bot.sendMessage(chat_id, "- /start: Welcome message.\n- /help: Display the list of commands.\n- /create: Give access to a new MAC into an interval; you need to provide a MAC and select an interval between 1-12 (/create XX:XX:XX:XX:XX:XX MM).\n- /update: Update the intervals of an existing MAC; you need to provide a MAC and select an interval between 1-12 (/update XX:XX:XX:XX:XX:XX MM).\n- /revoke: Revoke permissions to an existing MAC access to the selected interval; you need to provide a MAC and select an interval between 1-12 (/revoke XX:XX:XX:XX:XX:XX MM).\n- /active: List active MAC's.\n- /enabled: List MAC's enable to connect now.\n- /all: List all the MAC's that are able to connect among the day.\n- /newadmin: Creates a new admin, you need to provide an user id.\n- /deladmin: Deletes an existing admin, you need to provide an user id.\n- /listadmins: List all admins.\n- /sub: Activates notifications for an specific admin when a MAC connects.\n- /unsub: Desactivate notifications for an specific admin when a MAC connects.\n- /listsubs: List admins who are subscribed to notifications.")
 
 
 def create_new_user(message, chat_id):
@@ -93,7 +90,7 @@ def add_new_admin(message, chat_id):
         admin = message.split()[1]
         if not hostapd.user_manager.is_admin(admin):
             hostapd.user_manager.add_admin(admin)
-            bot.sendMessage(chat_id, "User " + admin + " added succesfully!")
+            bot.sendMessage(chat_id, "User " + admin + " added successfully!")
         else:
             bot.sendMessage(chat_id, admin + " is already an admin!")
 
@@ -105,7 +102,7 @@ def delete_admin(message, chat_id):
         admin = message.split()[1]
         if hostapd.user_manager.is_admin(admin):
             hostapd.user_manager.del_admin(admin)
-            bot.sendMessage(chat_id, "User " + admin + " deleted succesfully!")
+            bot.sendMessage(chat_id, "User " + admin + " deleted successfully!")
         else:
             bot.sendMessage(chat_id, admin + " is not an admin!")
         
@@ -126,7 +123,7 @@ def sub(message, chat_id):
         admin = message.split()[1]
         if hostapd.user_manager.is_admin(admin) and not hostapd.user_manager.is_subscribed(admin):
             hostapd.user_manager.subscribe(admin)
-            bot.sendMessage(chat_id, "user " + admin + " suscribed succesfully!")
+            bot.sendMessage(chat_id, "user " + admin + " subscribed successfully!")
         else:
             bot.sendMessage(chat_id,admin + " is not an admin or is already subscribed!")
 
@@ -138,7 +135,7 @@ def unsub(message, chat_id):
         admin = message.split()[1]
         if hostapd.user_manager.is_admin(admin) and hostapd.user_manager.is_subscribed(admin):
             hostapd.user_manager.unsubscribe(admin)
-            bot.sendMessage(chat_id, "user " + admin + " unsuscribed succesfully!")
+            bot.sendMessage(chat_id, "user " + admin + " unsubscribed successfully!")
         else:
             bot.sendMessage(chat_id,admin + " is not an admin or is already unsubscribed!")
         
@@ -149,7 +146,7 @@ def unsub(message, chat_id):
 def list_all_subs(message, chat_id):
     subscribed = hostapd.user_manager.list_subscribed()
     if len(subscribed) > 0:
-        bot.sendMessage(chat_id, "Substribed:\n - " + ('\n- '.join(subscribed)))
+        bot.sendMessage(chat_id, "Subscribed:\n - " + ('\n- '.join(subscribed)))
     else:
         bot.sendMessage(chat_id, "There are no subscribed users, try to add one!")
 
@@ -180,7 +177,9 @@ def handle(msg):
     message = msg['text']
     print(f"[INFO] Message text: {message}")
 
-    if message == '/start': bot.sendMessage(chat_id, 'Hello! Type /help to know the list of messages.')
+    if message == '/start':
+        bot.sendMessage(chat_id, 'Hello! Type /help to know the list of messages.')
+        return
 
     if not hostapd.user_manager.is_admin(chat_id):
         print("User is not an ADMIN. Aborting.")
