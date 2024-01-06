@@ -71,7 +71,7 @@ Lists all the MAC's that are available to connect among all the intervals.
 /all
 ```
 
-### newadmin
+### /newadmin
 
 Adds a new admin to the system, these admin must be provided as a telegram
 user id, it is not enough with the @. Make sure you type it correctly!!
