@@ -22,6 +22,7 @@ We will start by installing the required packages:
 
 ```sh
 sudo apt install dnsmasq hostapd -y
+sudo python3 -m pip install telepot
 ```
 
 Then, we will **append** to `/etc/dhcpcd.conf` (`sudo nano /etc/dhcpcd.conf`):

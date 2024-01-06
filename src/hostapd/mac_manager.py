@@ -1,16 +1,16 @@
-from ._utils import ACT_AS_DUMMY, current_hour
+from ._utils import get_dummy_mode, current_hour
 from . import _file_manager, whitelist_updater
 
 import random, subprocess
 
 def list_connected():
-    if ACT_AS_DUMMY: 
+    if get_dummy_mode(): 
         # Choose random devices
         enabled = list_enabled()
         sample_size = random.randint(0, len(enabled))
         return random.sample(enabled, sample_size)
 
-    temp = subprocess.Popen(['bash', "-c \"iw dev wlan0 station dump | grep Station | cut -f 2 -s -d' '\""], stdout = subprocess.PIPE) 
+    temp = subprocess.Popen(['bash', "-c", "iw dev wlan0 station dump | grep Station | cut -f 2 -s -d' '"], stdout = subprocess.PIPE) 
     return str(temp.communicate()).split('\n')
 
 def list_enabled():
@@ -23,7 +23,7 @@ def list_all():
     # Remove duplicates and return
     return list(set(flattened_data))
 
-def ranges_for_mac(mac_address): #TODO
+def ranges_for_mac(mac_address):
     result = []
     data = _file_manager.get_json_data()
     for hour_start in range(24):
@@ -44,7 +44,7 @@ def update_mac(mac_address, hour_ranges):
     _file_manager.write_json_data(data)
     current_enabled_macs = list_enabled()
 
-    if ACT_AS_DUMMY or previous_enabled_macs == current_enabled_macs: return
+    if get_dummy_mode() or previous_enabled_macs == current_enabled_macs: return
 
     # If we get here we need to reload hostAPd whitelist.
     whitelist_updater.update_whitelist()

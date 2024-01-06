@@ -6,3 +6,5 @@
 **/*.pyc
 # Ignore the JSON database
 data.json
+# Ignore Telegram Token
+src/hostapd_token.txt
