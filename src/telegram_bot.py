@@ -19,21 +19,20 @@ token_file.close()
 bot = telepot.Bot(BOT_TOKEN)
 
 def check_MAC(MAC):
-    
     regex_mac = "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"
     mac = ''.join(c.lower() for c in MAC if not c.isspace())
-    return re.match(regex_mac, mac) 
+    return re.match(regex_mac, mac)
 
 def check_MAC_Interval(args):
     result = args.split()
     try:
         if check_MAC(result[1]):
             for interval in list(result[2].split(",")):
-                if 0 <= int(interval) and int(interval) >= 23:
+                if 0 < int(interval) and int(interval) > 23:
                     return False
             return True
         else:
-            return False   
+            return False
     except:
         return False
 

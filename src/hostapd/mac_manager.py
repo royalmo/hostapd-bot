@@ -4,14 +4,15 @@ from . import _file_manager, whitelist_updater
 import random, subprocess
 
 def list_connected():
-    if get_dummy_mode(): 
+    if get_dummy_mode():
         # Choose random devices
         enabled = list_enabled()
         sample_size = random.randint(0, len(enabled))
         return random.sample(enabled, sample_size)
 
     temp = subprocess.Popen(['bash', "-c", "iw dev wlan0 station dump | grep Station | cut -f 2 -s -d' '"], stdout = subprocess.PIPE) 
-    return str(temp.communicate()).split('\n')
+    splitted = temp.communicate()[0].decode('utf-8').split('\n')
+    return [ x for x in splitted if x!='' ]
 
 def list_enabled():
     data = _file_manager.get_json_data()

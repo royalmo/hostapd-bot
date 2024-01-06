@@ -21,13 +21,13 @@ def list_admins():
 
 def subscribe(telegram_user_id):
     data = _file_manager.get_json_data()
-    if telegram_user_id not in data['subscribed']: return
+    if telegram_user_id in data['subscribed']: return
     data['subscribed'].append(telegram_user_id)
     _file_manager.write_json_data(data)
 
 def unsubscribe(telegram_user_id):
     data = _file_manager.get_json_data()
-    if telegram_user_id in data['subscribed']: return
+    if telegram_user_id not in data['subscribed']: return
     data['subscribed'].remove(telegram_user_id)
     _file_manager.write_json_data(data)
 

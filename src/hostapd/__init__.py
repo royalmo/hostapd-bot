@@ -9,4 +9,4 @@ import sys, os
 
 def can_run():
     # Checking if we are a root user when running in not dummy mode.
-    return get_dummy_mode() or (sys.platform in ["linux", "linux2"] and not os.geteuid() == 0)
+    return get_dummy_mode() or (sys.platform in ["linux", "linux2"] and os.geteuid() == 0)

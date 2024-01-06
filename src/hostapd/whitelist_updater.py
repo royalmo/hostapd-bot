@@ -5,8 +5,8 @@ import subprocess, os
 def get_enabled_macs_hard():
     if get_dummy_mode(): return []
 
-    temp = subprocess.Popen(['hostapd_cli', 'accept_acl SHOW'], stdout = subprocess.PIPE) 
-    output = str(temp.communicate()).split('\n')
+    temp = subprocess.Popen(['hostapd_cli', 'accept_acl', 'SHOW'], stdout = subprocess.PIPE) 
+    output = temp.communicate()[0].decode('utf-8').split('\n')
     enabled_macs = []
     if len(output) > 1:
         # First line is 'interface info' so we will ignore it
@@ -14,6 +14,7 @@ def get_enabled_macs_hard():
         for line in output:
             # Line format is aa:bb:cc:dd:ee:ff VLAN=0, so we only want the MAC
             enabled_macs.append(line.split(' ')[0])
+    return [x for x in enabled_macs if x!='']
 
 def update_whitelist():
     if get_dummy_mode(): return
@@ -24,13 +25,13 @@ def update_whitelist():
     for current_mac in real_enabled_macs:
         if current_mac not in json_enabled_macs:
             # Removing from whitelist
-            os.system(f"hostapd_cli accept_acl DEL_MAC {current_mac}")
+            os.system(f"hostapd_cli accept_acl DEL_MAC {current_mac} > /dev/null")
             # Disconnecting (whitelist is only checked when connecting to AP)
             # This command would not be needed if the user is not connected,
             # but we throw it anyway for the sake of safety.
-            os.system(f"hostapd_cli deauthenticate {current_mac}")
+            os.system(f"hostapd_cli deauthenticate {current_mac} > /dev/null")
 
     for current_mac in json_enabled_macs:
         if current_mac not in real_enabled_macs:
             # Whitelist
-            os.system(f"hostapd_cli accept_acl ADD_MAC {current_mac}")
+            os.system(f"hostapd_cli accept_acl ADD_MAC {current_mac} > /dev/null")
