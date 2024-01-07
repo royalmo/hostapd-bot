@@ -25,7 +25,7 @@ must be the input from the user for the command to work.
 
 ### /create
 
-Creates a new access of an specific MAC adress into an specific time interval.
+Creates a new access of an specific MAC address into an specific time interval.
 
 ```py
 /create aa:bb:cc:dd:ee:ff 1,2,5,12
@@ -33,7 +33,7 @@ Creates a new access of an specific MAC adress into an specific time interval.
 
 ### /update
 
-Updates an existing MAC adress intervals, adding or deleting the old ones.
+Updates an existing MAC address intervals, adding or deleting the old ones.
 
 ```py
 /update aa:bb:cc:dd:ee:ff 1,3,5,12,22,20
@@ -98,8 +98,8 @@ List all existing admins.
 
 ### /sub
 
-Subscribe an existing admin to recieving notifications every time a new MAC connects.
-(To actually recieve the notification, the admin subscribed **MUST** have already 
+Subscribe an existing admin to receiving notifications every time a new MAC connects.
+(To actually receive the notification, the admin subscribed **MUST** have already 
 send a message to the bot in first instance).
 
 ```py
@@ -108,7 +108,7 @@ send a message to the bot in first instance).
 
 ### /unsub
 
-Unsuscribe an already subscribed admin to recieving any notifications every
+Unsubscribe an already subscribed admin to receiving any notifications every
 time a new MAC connects.
 
 ```py

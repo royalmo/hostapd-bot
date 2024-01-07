@@ -24,6 +24,9 @@ new Raspberry Pi.
 Then, look at **docs/tutorial.md** to see how you can interact with the
 Telegram Bot.
 
+The other files at the *docs* folder are not written for users but for
+contributors.
+
 ## Contribute
 
 This project is Open Source and is part of the EPSEM's Communication Systems

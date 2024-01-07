@@ -38,7 +38,7 @@ def check_MAC_Interval(args):
 
 def print_help(message, chat_id):
     bot.sendMessage(chat_id, "Here are a list of the commands and it's function:")
-    bot.sendMessage(chat_id, "- /start: Welcome message.\n- /help: Display the list of commands.\n- /create: Give access to a new MAC into an interval; you need to provide a MAC and select an interval between 1-12 (/create XX:XX:XX:XX:XX:XX MM).\n- /update: Update the intervals of an existing MAC; you need to provide a MAC and select an interval between 1-12 (/update XX:XX:XX:XX:XX:XX MM).\n- /revoke: Revoke permissions to an existing MAC access to the selected interval; you need to provide a MAC and select an interval between 1-12 (/revoke XX:XX:XX:XX:XX:XX MM).\n- /active: List active MAC's.\n- /enabled: List MAC's enable to connect now.\n- /all: List all the MAC's that are able to connect among the day.\n- /newadmin: Creates a new admin, you need to provide an user id.\n- /deladmin: Deletes an existing admin, you need to provide an user id.\n- /listadmins: List all admins.\n- /sub: Activates notifications for an specific admin when a MAC connects.\n- /unsub: Desactivate notifications for an specific admin when a MAC connects.\n- /listsubs: List admins who are subscribed to notifications.")
+    bot.sendMessage(chat_id, "- /start: Welcome message.\n- /help: Display the list of commands.\n- /create: Give access to a new MAC into an interval; you need to provide a MAC and a list of CSV numbers 0-23 (representing hours) (/create XX:XX:XX:XX:XX:XX MM).\n- /update: Update the intervals of an existing MAC; you need to provide a MAC and a list of CSV numbers 0-23 (representing hours) (/update XX:XX:XX:XX:XX:XX MM).\n- /revoke: Revoke permissions to an existing MAC access to the selected interval; you need to provide a MAC (/revoke XX:XX:XX:XX:XX:XX).\n- /active: List active MAC's.\n- /enabled: List MAC's enable to connect now.\n- /all: List all the MAC's that are able to connect among the day.\n- /newadmin: Creates a new admin, you need to provide an user id.\n- /deladmin: Deletes an existing admin, you need to provide an user id.\n- /listadmins: List all admins.\n- /sub: Activates notifications for an specific admin when a MAC connects.\n- /unsub: Desactivate notifications for an specific admin when a MAC connects.\n- /listsubs: List admins who are subscribed to notifications.")
 
 
 def create_new_user(message, chat_id):
@@ -52,7 +52,7 @@ def create_new_user(message, chat_id):
 def revoke_mac(message, chat_id):
     try: 
         if check_MAC(message.split()[1]):
-            bot.sendMessage(chat_id,"Deleting NAC") 
+            bot.sendMessage(chat_id,"Deleting MAC") 
             hostapd.mac_manager.delete_mac(message.split()[1])
             
         else:
